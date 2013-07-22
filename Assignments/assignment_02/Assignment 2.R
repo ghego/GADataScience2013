@@ -5,9 +5,7 @@ labels <- data$Species
 data$Species <- NULL
 set.seed(1)
 
-N <- nrow(data)
-
-n <- 10 #n of cv folds (must be a divider of N)
+n <- 10 #n of cv folds (must be a divider of nrow(data))
 max.k <- 50 #max number of nearest neighbors
 
 #Function to run one iteration of knn for k in [1:max.k]
@@ -38,7 +36,7 @@ do.knn.subset <- function(max.k, train.data, test.data, train.labels, test.label
 # function to do the cross validation on n subsets for a given range of k
 do.cv <- function(n, max.k, data, labels){
   #helper factor that we will use to split the data into n subsets
-  indexc <- as.factor(c(rep(1:n, N/n)))
+  indexc <- as.factor(c(rep(1:n, nrow(data)/n)))
   data <- cbind(data, indexc)
   labels <- cbind(labels, indexc)
   
