@@ -11,7 +11,7 @@ n <- 10 #n of cv folds (must be a divider of N)
 max.k <- 50 #max number of nearest neighbors
 
 #Function to run one iteration of knn for k in [1:max.k]
-do.knn.subset <- function(max.k, i, train.data, test.data, train.labels, test.labels){
+do.knn.subset <- function(max.k, train.data, test.data, train.labels, test.labels){
   #data frame that will contain the result
   err.rates <- data.frame()
   
@@ -56,7 +56,7 @@ do.cv <- function(n, max.k, data, labels){
   	test.labels <- subset(labels, indexc == i)[,1]
     
     #run cv using function above
-    err.rates.temp <- do.knn.subset(max.k, i, train.data, test.data, train.labels, test.labels)
+    err.rates.temp <- do.knn.subset(max.k, train.data, test.data, train.labels, test.labels)
     
     #append results of specific cv as a column
     cv.result <- cbind(cv.result, err.rates.temp)
